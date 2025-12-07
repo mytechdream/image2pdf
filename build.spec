@@ -14,6 +14,8 @@ a = Analysis(
         'PIL._tkinter_finder',
         'reportlab.pdfbase._fontdata',
         'reportlab.pdfbase._cidfontdata',
+        'fitz',
+        'fitz.fitz',
     ],
     hookspath=[],
     hooksconfig={},

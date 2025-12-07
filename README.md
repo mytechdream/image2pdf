@@ -14,6 +14,7 @@
 - **白色背景**：图片可放置在可配置的白色背景上
 - **批量处理**：支持添加多张图片，生成多页 PDF
 - **图片顺序管理**：可上下移动图片调整页面顺序
+- **PDF 拼接**：合并多个 PDF 文件为单个文档
 
 ## 安装依赖
 
@@ -28,6 +29,8 @@ python main.py
 ```
 
 ## 使用说明
+
+### 图片转 PDF
 
 1. **添加图片**：
    - 点击"Add Images"按钮或使用 Ctrl+O
@@ -52,12 +55,32 @@ python main.py
    - 选择保存位置
    - PDF 文件将包含所有添加的图片
 
+### PDF 拼接
+
+1. **打开合并对话框**：
+   - 点击菜单 "File" → "Merge PDFs..." 或使用 Ctrl+M
+   - 或点击工具栏的 "Merge PDFs" 按钮
+
+2. **添加 PDF 文件**：
+   - 点击 "Add PDFs..." 按钮
+   - 选择要合并的 PDF 文件（可多选）
+   - 文件将显示在列表中，附带页数信息
+
+3. **调整顺序**：
+   - 使用 "↑ Move Up" 和 "↓ Move Down" 按钮调整文件顺序
+   - 合并后的 PDF 将按列表顺序排列
+
+4. **合并文件**：
+   - 点击 "Merge PDFs..." 按钮
+   - 选择输出文件位置
+   - 等待合并完成
+
 ## 技术栈
 
 - **PyQt5**：GUI 框架
 - **Pillow (PIL)**：图片处理
 - **reportlab**：PDF 生成
-- **PyMuPDF (fitz)**：PDF 渲染（用于预览）
+- **PyMuPDF (fitz)**：PDF 渲染和合并
 
 ## 项目结构
 
@@ -68,6 +91,8 @@ image2pdf/
 ├── preview_widget.py    # 预览组件
 ├── control_panel.py     # 控制面板
 ├── pdf_generator.py     # PDF 生成器
+├── pdf_merger.py        # PDF 合并模块
+├── pdf_merge_dialog.py  # PDF 合并对话框
 ├── image_processor.py   # 图片处理模块
 ├── models.py            # 数据模型
 ├── page_formats.py      # 页面格式定义
@@ -78,7 +103,12 @@ image2pdf/
 
 - `Ctrl+O`：添加图片
 - `Ctrl+S`：导出 PDF
+- `Ctrl+M`：合并 PDF 文件
 - `Ctrl+Q`：退出程序
+
+## 打包发布
+
+查看 [BUILD_GUIDE.md](BUILD_GUIDE.md) 了解如何将应用打包为可执行文件。
 
 ## 许可证
 
