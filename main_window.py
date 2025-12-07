@@ -11,6 +11,7 @@ from models import ProjectState
 from preview_widget import PreviewWidget
 from control_panel import ControlPanel
 from pdf_generator import PDFGenerator
+from pdf_merge_dialog import PDFMergeDialog
 import os
 
 
@@ -123,6 +124,12 @@ class MainWindow(QMainWindow):
         export_action.triggered.connect(self.export_pdf)
         file_menu.addAction(export_action)
         
+        # Merge PDFs action
+        merge_action = QAction("Merge PDFs...", self)
+        merge_action.setShortcut("Ctrl+M")
+        merge_action.triggered.connect(self.show_merge_dialog)
+        file_menu.addAction(merge_action)
+        
         file_menu.addSeparator()
         
         # Exit action
@@ -155,6 +162,11 @@ class MainWindow(QMainWindow):
         export_action = QAction("Export PDF", self)
         export_action.triggered.connect(self.export_pdf)
         toolbar.addAction(export_action)
+        
+        # Merge PDFs button
+        merge_action = QAction("Merge PDFs", self)
+        merge_action.triggered.connect(self.show_merge_dialog)
+        toolbar.addAction(merge_action)
     
     def on_parameter_changed(self):
         """Handle parameter changes."""
@@ -259,6 +271,11 @@ class MainWindow(QMainWindow):
                     f"An error occurred while exporting:\n{str(e)}"
                 )
     
+    def show_merge_dialog(self):
+        """Show the PDF merge dialog."""
+        dialog = PDFMergeDialog(self)
+        dialog.exec_()
+    
     def show_about(self):
         """Show about dialog."""
         QMessageBox.about(
@@ -272,6 +289,7 @@ class MainWindow(QMainWindow):
             "<li>Adjustable page sizes (A4, Letter, etc.)</li>"
             "<li>Image transformation (scale, rotate, position)</li>"
             "<li>Real-time PDF preview</li>"
+            "<li>Merge multiple PDF files</li>"
             "</ul>"
             "<p>Version 1.0</p>"
         )
